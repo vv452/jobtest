@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>求职舒缓小测试｜看看属于你的上岸节奏</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 12% 8%, #f3ece4 0, transparent 28%),
+      radial-gradient(circle at 88% 18%, #e9ece0 0, transparent 32%),
+      linear-gradient(180deg, #fbf7f2 0%, #f3ede4 100%);
+    color: #4b443c;
+    padding: 24px 18px 40px;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 540px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .healing-illustration {
+    position: fixed;
+    z-index: 0;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .illustration-1 {
+    top: 4%;
+    left: -6%;
+    width: 110px;
+    transform: rotate(-8deg);
+  }
+
+  .illustration-2 {
+    top: 22%;
+    right: -8%;
+    width: 96px;
+    transform: rotate(10deg);
+  }
+
+  .illustration-3 {
+    bottom: 6%;
+    left: -4%;
+    width: 120px;
+    transform: rotate(-4deg);
+  }
+
+  .illustration-4 {
+    bottom: 14%;
+    right: -6%;
+    width: 100px;
+    transform: rotate(6deg);
+  }
+
+  .page {
+    display: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page.active {
+    display: block;
+  }
+
+  .card {
+    background: rgba(255, 253, 249, 0.82);
+    border: 1px solid rgba(217, 206, 193, 0.45);
+    border-radius: 26px;
+    padding: 28px 24px;
+    box-shadow:
+      0 18px 45px rgba(148, 124, 104, 0.12),
+      0 6px 18px rgba(120, 105, 90, 0.08);
+    backdrop-filter: blur(10px);
+  }
+
+  .start-card {
+    text-align: center;
+    padding-top: 36px;
+    padding-bottom: 34px;
+  }
+
+  .cover-illustration {
+    width: 180px;
+    margin: 0 auto 18px;
+    display: block;
+  }
+
+  .question-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    line-height: 1.75;
+    color: #3d3630;
+  }
+
+  .option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 15px 17px;
+    margin: 11px 0;
+    border: 1px solid rgba(181, 168, 152, 0.35);
+    border-radius: 16px;
+    background: rgba(255, 253, 249, 0.72);
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4b443c;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .option:hover {
+    border-color: #c9b7a3;
+    background: #faf4ec;
+    transform: translateY(-1px);
+  }
+
+  .option.selected {
+    border-color: #b59a7d;
+    background: #f1e6d7;
+    box-shadow: 0 6px 16px rgba(181, 154, 125, 0.14);
+  }
+
+  .btns {
+    margin-top: 26px;
+    display: flex;
+    gap: 12px;
+  }
+
+  button {
+    flex: 1;
+    padding: 14px 12px;
+    border: none;
+    border-radius: 16px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  #nextBtn {
+    background: linear-gradient(135deg, #a78b72 0%, #876f5c 100%);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(135, 111, 92, 0.28);
+  }
+
+  #nextBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 26px rgba(135, 111, 92, 0.36);
+  }
+
+  #nextBtn:disabled {
+    background: #d9cfc3;
+    color: #f3ede4;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  #prevBtn {
+    background: rgba(255, 253, 249, 0.7);
+    color: #7d6f62;
+    border: 1px solid rgba(181, 168, 152, 0.4);
+  }
+
+  #prevBtn:hover {
+    background: #faf4ec;
+  }
+
+  #startBtn,
+  #restartBtn {
+    background: linear-gradient(135deg, #a78b72 0%, #876f5c 100%);
+    color: #fff;
+    box-shadow: 0 12px 24px rgba(135, 111, 92, 0.3);
+  }
+
+  #startBtn:hover,
+  #restartBtn:hover {
+    transform: translateY(-1px);
+  }
+
+  .result-box {
+    text-align: center;
+  }
+
+  .result-title {
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: #3d3630;
+  }
+  .result-text{
+    font-size:16px;
+    line-height:1.8;
+    margin-bottom:24px;
+    text-align:left;
+  }
+  .tip{
+    font-size:13px;
+    color:#888;
+    margin-top:20px;
+    line-height:1.7;
+  }
+  .end-page-text{
+    font-size:16px;
+    line-height:1.8;
+    color:#4b443c;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- 装饰SVG插画 -->
+  <svg class="healing-illustration illustration-1" viewBox="0 0 100 100" fill="none">
+    <path d="M50 20 C 30 35, 30 65, 50 80 C 70 65,70 35,50 20" stroke="#c9b7a3" stroke-width="2" fill="rgba(241,230,215,0.4)"/>
+    <circle cx="50" cy="45" r="6" fill="#b59a7d"/>
+    <path d="M42 60 Q50 70 58 60" stroke="#b59a7d" stroke-width="2" fill="none"/>
+  </svg>
+  <svg class="healing-illustration illustration-2" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="40" r="22" stroke="#c9b7a3" stroke-width="2" fill="rgba(241,230,215,0.4)"/>
+    <path d="M50 62 L50 78 M40 72 L60 72" stroke="#b59a7d" stroke-width="2"/>
+  </svg>
+  <svg class="healing-illustration illustration-3" viewBox="0 0 100 100" fill="none">
+    <path d="M25 75 Q50 20,75 75" stroke="#c9b7a3" stroke-width="2" fill="rgba(241,230,215,0.4)"/>
+    <circle cx="50" cy="48" r="5" fill="#b59a7d"/>
+  </svg>
+  <svg class="healing-illustration illustration-4" viewBox="0 0 100 100" fill="none">
+    <rect x="32" y="35" width="36" height="42" rx="8" stroke="#c9b7a3" stroke-width="2" fill="rgba(241,230,215,0.4)"/>
+    <path d="M40 48 L60 48 M40 58 L55 58" stroke="#b59a7d" stroke-width="2"/>
+  </svg>
+
+  <!-- 已完成测试页面（再次打开直接显示） -->
+  <div class="page" id="endPage">
+    <div class="card result-box">
+      <div class="result-title">✨已经完成测试啦</div>
+      <div class="end-page-text">
+        你已经完成本次求职节奏测试，每个人只可以测一次哦。<br><br>
+        愿你放平心态，稳步前行。求职路上的等待不是落空，是在筛选真正适合你的机会。不用焦虑，你付出的每一份努力都不会白费，好好生活，保持期待，属于你的offer正在奔赴你的路上。祝你早日上岸，万事顺意！
+      </div>
+    </div>
+  </div>
+
+  <!-- 开始页 -->
+  <div class="page" id="startPage">
+    <div class="card start-card">
+      <svg class="cover-illustration" viewBox="0 0 180 140" fill="none">
+        <path d="M90 25 C 60 45, 60 85, 90 115 C 120 85,120 45,90 25" stroke="#b59a7d" stroke-width="2.5" fill="rgba(241,230,215,0.45)"/>
+        <circle cx="90" cy="55" r="9" fill="#a78b72"/>
+        <path d="M76 80 Q90 96 104 80" stroke="#a78b72" stroke-width="2.5" fill="none"/>
+        <path d="M50 110 L130 110" stroke="#c9b7a3" stroke-width="2"/>
+      </svg>
+      <div class="question-title">✨求职舒缓小测试｜看看属于你的上岸节奏</div>
+      <p style="margin-bottom:20px;line-height:1.7">最近找工作很焦虑吗？凭第一感觉选择，这个测试用来安抚心情，仅供娱乐，不必焦虑</p>
+      <button id="startBtn">开始测试</button>
+    </div>
+  </div>
+
+  <!-- 题目容器 -->
+  <div id="questionWrap"></div>
+
+  <!-- 结果页 -->
+  <div class="page" id="resultPage">
+    <div class="card result-box">
+      <div class="result-title">你的专属节奏</div>
+      <div class="result-text" id="resultContent"></div>
+      <div class="tip">💛温馨提示：趣味陪伴测试，仅作情绪安抚，没有预测效力。求职路上起起伏伏是常态，投递、面试、等待、落空都是必经的过程。不必拿别人的进度对标自己，每个人的花期本就不同。你认真打磨简历、鼓起勇气投递、一次次奔赴面试，已经足够勇敢。慢慢来，属于你的机会正在朝你靠近，好好吃饭、好好休息，照顾好自己，好运一定会如约而至。</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// 本地存储标记，本机测过一次就记录
+const STORAGE_KEY = "job_test_finished";
+const questions = [
+  {
+    q: "1. 你目前投递简历的状态？",
+    opts: [
+      {text:"稳定投递，每天保持节奏，不盲目海投",score:5},
+      {text:"想到就投，有合适岗位才出手",score:4},
+      {text:"断断续续投，投完容易胡思乱想",score:2},
+      {text:"害怕投递，投出去就忍不住内耗",score:1}
+    ]
+  },
+  {
+    q: "2. 面试结束之后，你通常是什么状态？",
+    opts: [
+      {text:"复盘得失，放平心态，继续向前",score:5},
+      {text:"短暂惦记，过一会能转移注意力",score:4},
+      {text:"反复回想细节，不断自我怀疑",score:2},
+      {text:"很长一段时间陷在失落里，不敢再面",score:1}
+    ]
+  },
+  {
+    q: "3. 当看到别人拿到offer，你会？",
+    opts: [
+      {text:"替别人开心，明白每个人节奏不一样",score:5},
+      {text:"有点羡慕，但不会否定自己",score:4},
+      {text:"忍不住对比，觉得自己落后了",score:2},
+      {text:"很焦虑，觉得只有自己不行",score:1}
+    ]
+  },
+  {
+    q: "4. 简历和面试准备，你是？",
+    opts: [
+      {text:"持续打磨，清楚自己的优势",score:5},
+      {text:"基础准备好了，慢慢优化",score:4},
+      {text:"不太清楚亮点，不知道怎么改",score:2},
+      {text:"害怕看简历，不想准备面试",score:1}
+    ]
+  },
+  {
+    q: "5. 找不到工作的时候，你会好好照顾自己吗？",
+    opts: [
+      {text:"会，按时吃饭休息，留放松时间",score:5},
+      {text:"偶尔会，但偶尔会熬夜内耗",score:4},
+      {text:"经常作息混乱，没心思好好生活",score:2},
+      {text:"完全摆烂，吃睡都很随意",score:1}
+    ]
+  },
+  {
+    q: "6. 面对岗位，你对预期的想法？",
+    opts: [
+      {text:"有底线，也愿意给机会一点弹性",score:5},
+      {text:"有目标，少数条件可以让步",score:4},
+      {text:"期待很高，很难接受落差",score:2},
+      {text:"不知道自己想要什么，很迷茫",score:1}
+    ]
+  },
+  {
+    q: "7. 焦虑来临时，你能不能安抚自己？",
+    opts: [
+      {text:"可以，有办法调节情绪",score:5},
+      {text:"需要一点时间，慢慢平复",score:4},
+      {text:"很难调节，越想越难受",score:2},
+      {text:"被焦虑困住，很难走出来",score:1}
+    ]
+  },
+  {
+    q: "8. 你有没有给自己设置休息的空档？",
+    opts: [
+      {text:"会主动休息，不把自己绷太紧",score:5},
+      {text:"累到撑不住才停下来休息",score:4},
+      {text:"不敢休息，休息就有负罪感",score:2},
+      {text:"一直紧绷，不敢停下来",score:1}
+    ]
+  },
+  {
+    q: "9. 你相信自己有被合适岗位选中的可能吗？",
+    opts: [
+      {text:"相信，只是时机还没到",score:5},
+      {text:"时而相信，时而动摇",score:4},
+      {text:"经常怀疑自己的能力",score:2},
+      {text:"觉得自己很难找到好工作",score:1}
+    ]
+  },
+  {
+    q: "10. 求职路上，你愿意持续慢慢往前走吗？",
+    opts: [
+      {text:"愿意，接纳快慢，稳步前进",score:5},
+      {text:"有时候疲惫，但不想放弃",score:4},
+      {text:"经常想放弃，又不甘心",score:2},
+      {text:"已经不想继续尝试了",score:1}
+    ]
+  }
+];
+
+function getResult(score){
+  if(score >=40) return "💛你的状态很稳！你懂得照顾自己，也有清晰的节奏，不用着急。属于你的机会正在路上，保持现在的步调，你已经做得很好了，一周内很容易收到心动offer。";
+  if(score >=30) return "🤍你在努力坚持，偶尔会焦虑，这太正常了。求职本来就不是一条直线，有等待、有落空都很普遍。稳住节奏，多给自己一点耐心，半个月内会迎来不错的机会。";
+  if(score >=20) return "🌿最近你内耗比较多，常常会怀疑自己。先慢一点，不用逼自己一直冲刺。可以先停下来整理情绪，休息不是偷懒，调整好之后，再重新出发也完全来得及，一个月内会遇见适合你的工作。";
+  return "🤍你现在压力很重，被焦虑裹住了。先放下“必须马上找到工作”的执念。你的价值，从来不是一份offer定义的。先好好照顾自己，等情绪松下来，机会会悄悄靠近你。";
+}
+
+let current = 0;
+let totalScore = 0;
+let selected = null;
+const startPage = document.getElementById('startPage');
+const resultPage = document.getElementById('resultPage');
+const endPage = document.getElementById('endPage');
+const questionWrap = document.getElementById('questionWrap');
+const resultContent = document.getElementById('resultContent');
+
+// 初始化判断：本机是否已经测过
+function initCheck(){
+  if(localStorage.getItem(STORAGE_KEY)){
+    endPage.classList.add('active');
+  }else{
+    startPage.classList.add('active');
+  }
+}
+
+function renderQuestion(){
+  selected = null;
+  const item = questions[current];
+  let html = `<div class="page active" id="q${current}">
+    <div class="card">
+      <div class="question-title">${item.q}</div>`;
+  item.opts.forEach((opt,i)=>{
+    html += `<button class="option" data-score="${opt.score}" data-idx="${i}">${opt.text}</button>`
+  })
+  html += `<div class="btns">`;
+  if(current>0) html += `<button id="prevBtn">上一题</button>`;
+  html += `<button id="nextBtn" disabled>下一题</button>`;
+  html += `</div></div></div>`;
+  questionWrap.innerHTML = html;
+
+  document.querySelectorAll('.option').forEach(el=>{
+    el.onclick = ()=>{
+      document.querySelectorAll('.option').forEach(e=>e.classList.remove('selected'))
+      el.classList.add('selected');
+      selected = Number(el.dataset.score);
+      document.getElementById('nextBtn').disabled = false;
+    }
+  })
+  const prevBtn = document.getElementById('prevBtn');
+  if(prevBtn) prevBtn.onclick = prev;
+  document.getElementById('nextBtn').onclick = next;
+}
+
+function next(){
+  if(selected === null) return;
+  totalScore += selected;
+  current++;
+  if(current >= questions.length){
+    showResult();
+  }else{
+    renderQuestion();
+  }
+}
+function prev(){
+  if(current <=0) return;
+  current--;
+  renderQuestion();
+}
+function showResult(){
+  // 标记：本机已完成测试
+  localStorage.setItem(STORAGE_KEY, "1");
+  startPage.classList.remove('active');
+  questionWrap.innerHTML = '';
+  resultPage.classList.add('active');
+  resultContent.innerText = getResult(totalScore);
+}
+
+document.getElementById('startBtn').onclick = ()=>{
+  startPage.classList.remove('active');
+  renderQuestion();
+}
+
+// 页面加载先判断
+initCheck();
+</script>
+</body>
+</html>
